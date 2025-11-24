@@ -52,6 +52,12 @@ def find_best_skill_match(title: str, description: str, model, skill_embeddings,
     
     # Retrieve skill_id too
     skill_id = ssg_skills_df['skill_id'][top_idx]
+    
+    # Extracted the score value so i can create the duplicate flag based on 0.6695 threshold
+    score_value = float(scores[top_idx])
+    
+    # Applying the threshold value
+    is_duplicate = score_value >= 0.6695
 
     return {
         "input_skill_title": title.strip(),
@@ -59,6 +65,7 @@ def find_best_skill_match(title: str, description: str, model, skill_embeddings,
         "output_skill_id": skill_id,
         "output_skill_title": mapped_title.strip(),
         "output_skill_description": mapped_desc.strip(),
-        "score": float(scores[top_idx])
+        "score": score_value,
+        "isDuplicate": is_duplicate
     }
 
