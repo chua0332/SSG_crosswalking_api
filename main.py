@@ -40,7 +40,7 @@ def load_resources():
 def root():
     return {"status": "OK", "message": "Skill Matching API online"}
 
-@app.post("/match-skill")
+@app.get("/match-skill")
 def match_skill(input: SkillInput=Depends()):
     """
     Given an input skill title + description, return the best matching SSG skill
