@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Depends
 from pydantic import BaseModel
 import pandas as pd 
 import torch 
@@ -41,7 +41,7 @@ def root():
     return {"status": "OK", "message": "Skill Matching API online"}
 
 @app.post("/match-skill")
-def match_skill(input: SkillInput):
+def match_skill(input: SkillInput=Depends()):
     """
     Given an input skill title + description, return the best matching SSG skill
     """
